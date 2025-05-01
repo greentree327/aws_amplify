@@ -42,12 +42,17 @@ function Header() {
         boxShadow: isHovered ? "0 2px 4px rgba(0,0,0,0.1)" : (isScrolled && !isAboutPage ? "0 2px 4px rgba(0,0,0,0.1)" : "none"),
         transition: "all 0.3s ease"
       }}>
-      <div style={{ 
-        fontSize: "30px", 
-        fontWeight: "bold",
-        color: isHovered ? "#333" : "#fff",
-        transition: "color 0.3s ease"
-      }}>AdVantage AI</div>
+      <NavLink 
+        to="/"
+        style={{ 
+          fontSize: "30px", 
+          fontWeight: "bold",
+          color: isHovered ? "#333" : "#fff",
+          transition: "color 0.3s ease",
+          textDecoration: "none"
+        }}>
+        AdVantage AI
+      </NavLink>
       <nav>
         {navLinks.map((link) => (
           <NavLink

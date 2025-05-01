@@ -9,41 +9,30 @@ import BlogChatbot from "./components/BlogChatbot";
 import Features from "./components/Features";
 import Contact from "./components/Contact";
 import Customers from "./components/Customers";
+import UserExperience from './components/UserExperience';
 
 function App() {
   return (
     <Router>
-      <div style={{ 
-        display: 'flex', 
-        flexDirection: 'column', 
-        minHeight: '100vh',
-        maxWidth: '100vw',
-        margin: 0,
-        padding: 0,
-        overflow: 'hidden'
-      }}>
+      <div>
         <Header />
-        <main style={{ flex: 1, width: '100vw', overflow: 'hidden' }}>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <>
-                  <HeroSection />
-                  <Features />
-                  <Customers />
-                </>
-              }
-            />
-            <Route path="/about" element={<About />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/meta-ads" element={<BlogMetaAds />} />
-            <Route path="/blog/chatbot" element={<BlogChatbot />} />
-            <Route path="/contact" element={<Contact />} />
-          </Routes>
-        </main>
-        <Footer />
+        <Routes>
+          <Route path="/" element={
+            <>
+              <HeroSection />
+              <Features />
+              <UserExperience />
+              <Customers />
+            </>
+          } />
+          <Route path="/about" element={<About />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/meta-ads" element={<BlogMetaAds />} />
+          <Route path="/blog/chatbot" element={<BlogChatbot />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
       </div>
+      <Footer />
     </Router>
   );
 }
