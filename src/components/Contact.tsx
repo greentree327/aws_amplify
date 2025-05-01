@@ -76,27 +76,17 @@ function Contact() {
         <section style={{
           flex: 1,
           background: "#fff",
-          padding: "80px 40px",
+          padding: "40px 40px",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between"
         }}>
           <div>
-            <h1 style={{
-              fontSize: "6rem",
-              margin: 0,
-              fontWeight: "bold",
-              marginBottom: "40px",
-              display: "inline-block",
-              backgroundColor: "#f3ff49",
-              padding: "0 20px"
-            }}>
-              Reach out.
-            </h1>
-
+           
             {/* Single Contact Information */}
             <div style={{
               marginTop: "40px",
+              marginLeft: "100px",
               maxWidth: "800px"
             }}>
               <div>

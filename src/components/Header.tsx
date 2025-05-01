@@ -58,6 +58,7 @@ function Header() {
               color: isHovered ? "#333" : "#fff",
               textDecoration: "none",
               fontWeight: isActive ? "bold" : "normal",
+              fontSize: "18px",
               position: "relative",
               padding: "5px 0",
               transition: "color 0.3s ease",

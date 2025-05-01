@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const slides = [
   {
@@ -20,6 +21,7 @@ const slides = [
 
 function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -61,8 +63,8 @@ function HeroSection() {
             opacity: index === currentSlide ? 1 : 0,
             transition: "opacity 0.5s ease-in-out",
             background: `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(${slide.image})`,
-            backgroundSize: slide.image.includes('slide3-1.png') ? '100% auto' : 'cover',
-            backgroundPosition: slide.image.includes('slide3-1.png') ? 'center top' : 'center',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
             backgroundRepeat: "no-repeat",
             display: "flex",
             flexDirection: "column",
@@ -94,27 +96,18 @@ function HeroSection() {
               gap: "1rem",
               alignItems: "center"
             }}>
-              <button style={{
-                padding: "15px 30px",
-                fontSize: "16px",
-                backgroundColor: "#007bff",
-                color: "white",
-                border: "none",
-                borderRadius: "5px",
-                cursor: "pointer"
-              }}>
-                Get Started
-              </button>
-              <button style={{
-                padding: "15px 30px",
-                fontSize: "16px",
-                backgroundColor: "transparent",
-                color: "white",
-                border: "2px solid white",
-                borderRadius: "5px",
-                cursor: "pointer"
-              }}>
-                Book a Demo
+              <button 
+                onClick={() => navigate('/contact')}
+                style={{
+                  padding: "15px 30px",
+                  fontSize: "16px",
+                  backgroundColor: "#007bff",
+                  color: "white",
+                  border: "none",
+                  borderRadius: "5px",
+                  cursor: "pointer"
+                }}>
+                Our Solutions
               </button>
             </div>
           </div>
@@ -169,7 +162,6 @@ function HeroSection() {
           <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
         </svg>
       </button>
-
       <style>
         {`
           @keyframes bounce {
