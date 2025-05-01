@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const slides = [
   {
-    image: "/images/slide1.jpg",
+    image: "/images/slide1-1.jpg",
     title: "Take Advantage\nof AI",
     description: "Unlock new opportunities with advanced analytics."
   },

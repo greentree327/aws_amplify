@@ -32,7 +32,7 @@ function Features() {
         fontSize: "2.5rem",
         color: "#333"
       }}>
-        Showcasing some of the AI-powered solutions we have implemented
+        Proven AI Solutions in Action
       </h2>
       <div style={{
         display: "flex",

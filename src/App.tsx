@@ -3,7 +3,9 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import HeroSection from "./components/HeroSection";
 import About from "./components/About";
-import Product from "./components/Product";
+import Blog from "./components/Blog";
+import BlogMetaAds from "./components/BlogMetaAds";
+import BlogChatbot from "./components/BlogChatbot";
 import Features from "./components/Features";
 import Contact from "./components/Contact";
 import Customers from "./components/Customers";
@@ -34,7 +36,9 @@ function App() {
               }
             />
             <Route path="/about" element={<About />} />
-            <Route path="/product" element={<Product />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/meta-ads" element={<BlogMetaAds />} />
+            <Route path="/blog/chatbot" element={<BlogChatbot />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
         </main>
