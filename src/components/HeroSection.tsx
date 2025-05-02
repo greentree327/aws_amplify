@@ -42,7 +42,7 @@ function HeroSection() {
     <section id="home" style={{
       position: "relative",
       height: "100vh",
-      width: "100vw",
+      width: "100%",
       margin: 0,
       padding: 0,
       overflow: "hidden",
@@ -56,7 +56,7 @@ function HeroSection() {
             top: 0,
             left: 0,
             right: 0,
-            width: "100vw",
+            width: "100%",
             height: "100%",
             margin: 0,
             padding: 0,
@@ -73,38 +73,40 @@ function HeroSection() {
           }}
         >
           <div style={{
-            maxWidth: "800px",
+            maxWidth: "var(--content-width)",
             width: "100%",
-            padding: "0 8%",
+            margin: "0",
+            paddingLeft: "clamp(2rem, 5vw, 6rem)",
+            paddingRight: "clamp(1rem, 3vw, 3rem)",
           }}>
             <h1 style={{ 
-              fontSize: "4.5rem", 
-              marginBottom: "1.5rem",
+              fontSize: "var(--heading-font-size)",
+              marginBottom: "clamp(1rem, 2vw, 2rem)",
               textAlign: "left",
-              lineHeight: "1.1",
-              whiteSpace: "pre-line" // This ensures \n creates new lines
+              lineHeight: 1.1,
+              whiteSpace: "pre-line"
             }}>{slide.title}</h1>
             <p style={{ 
-              fontSize: "1.5rem", 
-              marginBottom: "2.5rem",
+              fontSize: "clamp(1rem, 1.5vw, 1.5rem)", 
+              marginBottom: "clamp(1.5rem, 3vw, 2.5rem)",
               textAlign: "left",
-              lineHeight: "1.4",
-              maxWidth: "600px" // Control line length for readability
+              lineHeight: 1.4,
+              maxWidth: "min(600px, 90%)"
             }}>{slide.description}</p>
             <div style={{
               display: "flex",
-              gap: "1rem",
+              gap: "var(--spacing-unit)",
               alignItems: "center"
             }}>
               <button 
                 onClick={() => navigate('/contact')}
                 style={{
-                  padding: "15px 30px",
-                  fontSize: "16px",
+                  padding: "clamp(0.8rem, 1.5vw, 1rem) clamp(1.5rem, 2vw, 2rem)",
+                  fontSize: "clamp(1rem, 1.2vw, 1.2rem)",
                   backgroundColor: "#007bff",
                   color: "white",
                   border: "none",
-                  borderRadius: "5px",
+                  borderRadius: "0.3rem",
                   cursor: "pointer"
                 }}>
                 Our Solutions
@@ -116,22 +118,25 @@ function HeroSection() {
       
       <div style={{
         position: "absolute",
-        bottom: "20px",
+        bottom: "var(--spacing-unit)",
         left: "8%",
         display: "flex",
-        gap: "10px"
+        gap: "0.5rem"
       }}>
         {slides.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrentSlide(index)}
             style={{
-              width: "12px",
-              height: "12px",
+              width: "clamp(8px, 0.75vw, 12px)",
+              height: "clamp(8px, 0.75vw, 12px)",
+              minWidth: "8px",
+              minHeight: "8px",
               borderRadius: "50%",
               backgroundColor: index === currentSlide ? "#fff" : "rgba(255,255,255,0.5)",
               border: "none",
-              cursor: "pointer"
+              cursor: "pointer",
+              padding: 0
             }}
           />
         ))}
@@ -141,21 +146,21 @@ function HeroSection() {
         onClick={scrollToFeatures}
         style={{
           position: "absolute",
-          bottom: "40px",
+          bottom: "clamp(1.5rem, 3vw, 2.5rem)",
           left: "50%",
           transform: "translateX(-50%)",
           background: "transparent",
           border: "none",
           cursor: "pointer",
-          padding: "10px",
+          padding: "0.6rem",
           animation: "bounce 2s infinite",
           zIndex: 10
         }}
         aria-label="Scroll to Features"
       >
         <svg 
-          width="40" 
-          height="40" 
+          width="clamp(24px, 2.5vw, 40px)" 
+          height="clamp(24px, 2.5vw, 40px)" 
           viewBox="0 0 24 24" 
           fill="white"
         >

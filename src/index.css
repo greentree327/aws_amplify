@@ -1,7 +1,18 @@
+:root {
+  --base-font-size: clamp(16px, 1vw, 18px);
+  --heading-font-size: clamp(2.5rem, 4vw, 4.5rem);
+  --content-width: min(90%, 1200px);
+  --spacing-unit: clamp(0.5rem, 1vw, 1rem);
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+html {
+  font-size: var(--base-font-size);
 }
 
 html, body {
@@ -15,7 +26,7 @@ body {
   display: flex;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   min-height: 100vh;
-  width: 100vw;
+  width: 100%;
 }
 
 main {
@@ -26,10 +37,10 @@ main {
 }
 
 button {
-  border-radius: 8px;
+  border-radius: 0.5rem;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
-  font-size: 1em;
+  font-size: 1rem;
   font-weight: 500;
   font-family: inherit;
   background-color: #1a1a1a;

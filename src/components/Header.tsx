@@ -32,11 +32,11 @@ function Header() {
         top: 0,
         left: 0,
         right: 0,
-        zIndex: isHovered ? 9999 : 1000, // Increase z-index on hover to ensure it's the top layer
+        zIndex: isHovered ? 9999 : 1000,
         display: "flex",
         justifyContent: "space-between",
-        alignItems: "left",
-        padding: "30px 140px",
+        alignItems: "center",
+        padding: "clamp(1rem, 2vw, 2rem) clamp(1rem, 5vw, 8rem)",
         background: isHovered ? "#ffffff" : (isAboutPage ? "transparent" : (isScrolled ? "rgba(0, 0, 0, 0.9)" : "transparent")),
         color: isHovered ? "#333" : "#fff",
         boxShadow: isHovered ? "0 2px 4px rgba(0,0,0,0.1)" : (isScrolled && !isAboutPage ? "0 2px 4px rgba(0,0,0,0.1)" : "none"),
@@ -45,7 +45,7 @@ function Header() {
       <NavLink 
         to="/"
         style={{ 
-          fontSize: "30px", 
+          fontSize: "clamp(1.5rem, 2vw, 2rem)", 
           fontWeight: "bold",
           color: isHovered ? "#333" : "#fff",
           transition: "color 0.3s ease",
@@ -59,13 +59,13 @@ function Header() {
             key={link.to}
             to={link.to}
             style={({ isActive }) => ({
-              margin: "0 15px",
+              margin: "0 clamp(0.5rem, 1vw, 1rem)",
               color: isHovered ? "#333" : "#fff",
               textDecoration: "none",
               fontWeight: isActive ? "bold" : "normal",
-              fontSize: "18px",
+              fontSize: "clamp(1rem, 1.2vw, 1.2rem)",
               position: "relative",
-              padding: "5px 0",
+              padding: "0.3rem 0",
               transition: "color 0.3s ease",
               '&:hover': {
                 opacity: 0.7
