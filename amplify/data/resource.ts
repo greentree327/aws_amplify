@@ -1,5 +1,4 @@
 import { type ClientSchema, a, defineData } from "@aws-amplify/backend";
-import { demoNotification } from '../functions/demoNotification/resource';
 
 /*== STEP 1 ===============================================================
 The section below creates a Todo database table with a "content" field. Try
@@ -25,10 +24,7 @@ const schema = a.schema({
       website: a.string(),
       createdAt: a.string(),
     })
-    .authorization((allow) => [allow.publicApiKey()])
-    .triggers({
-      onCreate: [demoNotification]
-    }),
+    .authorization((allow) => [allow.publicApiKey()]),
     ////////////////////////////////////////////////////////
   });
 
