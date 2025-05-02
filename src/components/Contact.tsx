@@ -1,4 +1,8 @@
 import { useState } from 'react';
+import { generateClient } from "aws-amplify/data";
+import type { Schema } from "../../amplify/data/resource";
+
+const client = generateClient<Schema>();
 
 const contactSlide = {
   image: "/images/Contact_us.png",
@@ -13,10 +17,40 @@ function Contact() {
     businessType: '',
     website: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{type: 'success' | 'error', message: string} | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      await client.models.Demo.create({
+        ...formData,
+        createdAt: new Date().toISOString()
+      });
+      
+      setSubmitStatus({
+        type: 'success',
+        message: 'Thank you for your interest! We will contact you soon.'
+      });
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        businessType: '',
+        website: ''
+      });
+    } catch (error) {
+      setSubmitStatus({
+        type: 'error',
+        message: 'Sorry, there was an error submitting your request. Please try again.'
+      });
+      console.error('Error submitting form:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -249,10 +283,12 @@ function Contact() {
                     backgroundColor: "#fff"
                   }}
                 >
-                  <option value="">e.g. Brand, Agency, Aggregator</option>
-                  <option value="brand">Brand</option>
-                  <option value="agency">Agency</option>
-                  <option value="aggregator">Aggregator</option>
+                  <option value="">Select your business type</option>
+                  <option value="startup">Startup</option>
+                  <option value="ecommerce">E-commerce</option>
+                  <option value="enterprise">Enterprise</option>
+                  <option value="nonprofit">Nonprofit Organization</option>
+                  <option value="freelancer">Freelancer/Consultant</option>
                 </select>
               </div>
 
@@ -281,20 +317,32 @@ function Contact() {
               </div>
 
               <div style={{ gridColumn: "1 / -1" }}>
+                {submitStatus && (
+                  <div style={{
+                    padding: "1rem",
+                    marginBottom: "1rem",
+                    borderRadius: "4px",
+                    backgroundColor: submitStatus.type === 'success' ? '#d4edda' : '#f8d7da',
+                    color: submitStatus.type === 'success' ? '#155724' : '#721c24'
+                  }}>
+                    {submitStatus.message}
+                  </div>
+                )}
                 <button
                   type="submit"
+                  disabled={isSubmitting}
                   style={{
                     padding: "1rem 2rem",
                     fontSize: "1rem",
-                    backgroundColor: "#005E66",
+                    backgroundColor: isSubmitting ? "#cccccc" : "#005E66",
                     color: "#fff",
                     border: "none",
                     borderRadius: "4px",
-                    cursor: "pointer",
+                    cursor: isSubmitting ? "not-allowed" : "pointer",
                     width: "100%"
                   }}
                 >
-                  Book a Demo
+                  {isSubmitting ? "Submitting..." : "Book a Demo"}
                 </button>
               </div>
             </form>
