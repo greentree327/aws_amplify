@@ -7,36 +7,40 @@ specifies that any user authenticated via an API key can "create", "read",
 "update", and "delete" any "Todo" records.
 =========================================================================*/
 const schema = a.schema({
-  Todo: a
-    .model({
-      content: a.string(),
-    })
-    .authorization((allow) => [allow.publicApiKey()]),
-    ////////////////////////////////////////////////////////
-
-  // Demo: a data structure to store information submitted by users when they request a personalized demo
+  // Demo Model: Stores information from demo request form submissions
   Demo: a 
     .model({
+      // User information fields
       firstName: a.string(),
       lastName: a.string(),
       email: a.string(),
+      // Business information fields
       businessType: a.string(),
       website: a.string(),
       createdAt: a.string(),
     })
-    .authorization((allow) => [allow.publicApiKey()]),
-    ////////////////////////////////////////////////////////
-  });
+    .authorization((allow) => [
+      // Allow public access through API key for all CRUD operations
+      // This enables the demo form to be submitted without user authentication
+      allow.publicApiKey()
+    ])
+    .dynamoDbStreamConfig({ enabled: true }), // Enable DynamoDB streams
+});
 
+// Export the schema type for use in frontend TypeScript code
 export type Schema = ClientSchema<typeof schema>;
 
+// Configure and export the data infrastructure
 export const data = defineData({
+  // Attach our schema to the data configuration
   schema,
+  // Configure authentication modes
   authorizationModes: {
+    // Set API key as the default auth mode
     defaultAuthorizationMode: "apiKey",
-    // API Key is used for a.allow.public() rules
+    // Configure API key settings
     apiKeyAuthorizationMode: {
-      expiresInDays: 30,
+      expiresInDays: 30, // API keys will expire after 30 days
     },
   },
 });
