@@ -44,7 +44,7 @@ export const handler: DynamoDBStreamHandler = async (event) => {
                   Data: "Your Demo Request Confirmation - AdVantage AI",
                 },
               },
-              Source: "your-verified-email@yourdomain.com", // Replace with your SES verified email
+              Source: "evoncapitalorg@gmail.com", // Replace with your SES verified email
             };
 
             const result = await ses.sendEmail(params);
