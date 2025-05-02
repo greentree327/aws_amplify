@@ -10,11 +10,18 @@ interface Testimonial {
 
 const testimonials: Testimonial[] = [
     {
-        name: "Jordan Mike",
-        position: "Project Manager",
-        company: "Capricorn Consultancy",
+        name: "Oscar Lew",
+        position: "Technology Analyst",
+        company: "Nomura",
         quote: "AdVantage AI transformed the way we approach automation. Their AI-driven messaging and task-specific chatbot solutions made our processes seamless from day one. Their expertise in automating advertising campaigns on platforms like Meta was exactly what we needed to scale our business efficiently.",
-        image: "/images/slide1.jpg"
+        image: "/images/Oscar.jpg"
+    },
+    {
+        name: "Roger Ng",
+        position: "Software Engineer",
+        company: "Google",
+        quote: "AdVantage AI has truly revolutionized our workflow with its innovative solutions, their Unified Analytics Dashboard ties everything together, providing actionable insights that drive smarter decisions. It’s a comprehensive platform that delivers tangible results for businesses looking to grow efficiently!",
+        image: "/images/Roger.jpg"
     },
     // Add more testimonials here
 ];
