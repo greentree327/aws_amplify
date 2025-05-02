@@ -1,21 +1,21 @@
 import type { DynamoDBStreamHandler } from "aws-lambda";
 import { Logger } from "@aws-lambda-powertools/logger";
-import { SES } from "@aws-sdk/client-ses";
+import { SESClient, SendEmailCommand, ListVerifiedEmailAddressesCommand, VerifyEmailAddressCommand } from "@aws-sdk/client-ses";
 
 const logger = new Logger({
     logLevel: "INFO",
     serviceName: "dynamodb-stream-handler",
 });
 
-const ses = new SES({ region: 'ap-southeast-2' });
+const sesClient = new SESClient({ region: 'ap-southeast-2' });
 
 // Function to verify email address
 async function verifyEmailAddress(emailAddress: string): Promise<void> {
   try {
-    const params = {
+    const command = new VerifyEmailAddressCommand({
       EmailAddress: emailAddress
-    };
-    await ses.verifyEmailAddress(params);
+    });
+    await sesClient.send(command);
     logger.info(`Verification email sent to: ${emailAddress}`);
   } catch (error) {
     logger.error('Error verifying email:', error as Error);
@@ -26,7 +26,8 @@ async function verifyEmailAddress(emailAddress: string): Promise<void> {
 // Function to check if email is verified
 async function isEmailVerified(emailAddress: string): Promise<boolean> {
   try {
-    const { VerifiedEmailAddresses } = await ses.listVerifiedEmailAddresses({});
+    const command = new ListVerifiedEmailAddressesCommand({});
+    const { VerifiedEmailAddresses } = await sesClient.send(command);
     return VerifiedEmailAddresses?.includes(emailAddress) || false;
   } catch (error) {
     logger.error('Error checking email verification:', error as Error);
@@ -64,7 +65,7 @@ export const handler: DynamoDBStreamHandler = async (event) => {
 
           if (email) {
             try {
-              const params = {
+              const command = new SendEmailCommand({
                 Destination: {
                   ToAddresses: [email],
                 },
@@ -110,9 +111,9 @@ export const handler: DynamoDBStreamHandler = async (event) => {
                   },
                 },
                 Source: senderEmail,
-              };
+              });
 
-              const result = await ses.sendEmail(params);
+              const result = await sesClient.send(command);
               logger.info(`Email sent successfully: ${JSON.stringify(result)}`);
             } catch (error) {
               logger.error("Error sending email:", error as Error);
