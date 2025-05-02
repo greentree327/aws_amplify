@@ -14,7 +14,8 @@ const schema = a.schema({
     .authorization((allow) => [allow.publicApiKey()]),
     ////////////////////////////////////////////////////////
 
-  Demo: a
+  // Demo: a data structure to store information submitted by users when they request a personalized demo
+  Demo: a 
     .model({
       firstName: a.string(),
       lastName: a.string(),
