@@ -2,23 +2,17 @@
   "name": "demonotification",
   "version": "1.0.0",
   "main": "handler.js",
-  "type": "module",
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "npm install --save-exact @aws-sdk/client-ses"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
     "@aws-lambda-powertools/logger": "^2.0.0",
-    "@aws-sdk/client-ses": "3.418.0"
+    "@aws-sdk/client-ses": "^3.418.0",
+    "@types/aws-lambda": "^8.10.119"
   },
   "devDependencies": {
-    "@types/aws-lambda": "^8.10.119",
     "@types/node": "^18.0.0",
     "typescript": "^5.0.0"
   }
