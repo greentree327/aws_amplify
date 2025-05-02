@@ -23,8 +23,7 @@ const schema = a.schema({
       // Allow public access through API key for all CRUD operations
       // This enables the demo form to be submitted without user authentication
       allow.publicApiKey()
-    ])
-    .dynamoDbStreamConfig({ enabled: true }), // Enable DynamoDB streams
+    ]),
 });
 
 // Export the schema type for use in frontend TypeScript code
