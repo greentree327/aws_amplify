@@ -27,14 +27,13 @@ const streamingPolicy = new Policy(
     statements: [
       new PolicyStatement({
         effect: Effect.ALLOW,
-        // Permissions needed to read from DynamoDB streams
         actions: [
           "dynamodb:DescribeStream",
           "dynamodb:GetRecords",
           "dynamodb:GetShardIterator",
           "dynamodb:ListStreams"
         ],
-        resources: ["*"]  // Allow access to all streams (could be restricted to specific ARNs)
+        resources: ["*"]
       })
     ]
   }
