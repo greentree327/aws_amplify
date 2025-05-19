@@ -1,6 +1,7 @@
 import { DynamoDBStreamEvent } from 'aws-lambda';
 import type { DynamoDBStreamHandler } from "aws-lambda";
 import { Logger } from "@aws-lambda-powertools/logger";
+import * as nodemailer from 'nodemailer';
 import { SES } from "@aws-sdk/client-ses";
 
 const logger = new Logger({
@@ -9,6 +10,9 @@ const logger = new Logger({
 });
 
 const ses = new SES({ region: 'ap-southeast-2' });
+const transporter = nodemailer.createTransport({
+  SES: { ses, aws: { region: 'ap-southeast-2' } },
+});
 
 export const handler: DynamoDBStreamHandler = async (event) => {
   logger.info("Starting to process records");
@@ -28,23 +32,14 @@ export const handler: DynamoDBStreamHandler = async (event) => {
         const website = newImage.website?.S;
         if (email) {
           try {
-            const params = {
-              Destination: {
-                ToAddresses: [email],
-              },
-              Message: {
-                Body: {
-                  Text: {
-                    Data: `Dear ${firstName} ${lastName},\n\nThank you for requesting a demo of our services. We have received your submission for ${businessType} business at ${website}.\n\nOur team will contact you shortly to schedule your personalized demo.\n\nBest regards,\nAdVantage AI Team`,
-                  },
-                },
-                Subject: {
-                  Data: "Your Demo Request Confirmation - AdVantage AI",
-                },
-              },
-              Source: "evoncapitalorg@gmail.com", // Replace with your SES verified email
+            const mailOptions = {
+              from: 'evoncapitalorg@gmail.com',
+              to: email,
+              subject: 'Your Demo Request Confirmation - AdVantage AI',
+              text: `Dear ${firstName} ${lastName},\n\nThank you for requesting a demo of our services. We have received your submission for ${businessType} business at ${website}.\n\nOur team will contact you shortly to schedule your personalized demo.\n\nBest regards,\nAdVantage AI Team`
             };
-            const result = await ses.sendEmail(params);
+
+            const result = await transporter.sendMail(mailOptions);
             logger.info(`Email sent successfully: ${JSON.stringify(result)}`);
           } catch (error) {
             logger.error("Error sending email:", error as Error);
