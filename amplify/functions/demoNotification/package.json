@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@aws-lambda-powertools/logger": "^2.0.0",
-    "@aws-sdk/client-ses": "^3.799.0",
+    "@aws-sdk/client-ses": "^3.812.0",
     "aws-sdk": "^2.1692.0",
     "nodemailer": "^7.0.3"
   },
