@@ -9,9 +9,9 @@ const logger = new Logger({
   serviceName: "dynamodb-stream-handler",
 });
 
-const ses = new SES({ region: 'ap-southeast-2' });
+const ses = new SES({ region: 'ap-southeast-1' });
 const transporter = nodemailer.createTransport({
-  SES: { ses, aws: { region: 'ap-southeast-2' } },
+  SES: { ses, aws: { region: 'ap-southeast-1' } },
 });
 
 export const handler: DynamoDBStreamHandler = async (event) => {

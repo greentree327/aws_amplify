@@ -39,7 +39,7 @@ const streamingPolicy = new Policy(
   }
 );
 
-// Add SES permissions
+// Add full SES permissions
 const sesPolicy = new Policy(
   Stack.of(demoTable),
   "DemoNotificationSESPolicy",
@@ -48,10 +48,9 @@ const sesPolicy = new Policy(
       new PolicyStatement({
         effect: Effect.ALLOW,
         actions: [
-          "ses:SendEmail",
-          "ses:SendRawEmail"
+          "ses:*" // Grant full SES permissions
         ],
-        resources: ["*"] // You might want to restrict this to specific SES ARNs in production
+        resources: ["*"]
       })
     ]
   }

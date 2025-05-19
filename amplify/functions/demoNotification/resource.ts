@@ -4,7 +4,7 @@ import { defineFunction } from '@aws-amplify/backend';
 // Define and export the Lambda function
 const demoNotification = defineFunction({
   name: 'demoNotification',
-  entry: './handler.ts'
+  entry: './handler.ts',
 });
 
 export { demoNotification };
